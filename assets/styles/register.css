@@ -1,0 +1,29 @@
+.role{
+    width: 100%;
+    display: flex;
+    text-align: center;
+}
+.role a{
+    width: auto;
+    flex: auto;
+}
+
+.login{
+    margin: 15px 0px 0px;
+    text-align: center;
+
+}
+
+
+.signup > b {
+    margin-top: 15px;
+    color: #2c3e50;
+}
+
+.role{
+    text-transform: capitalize;
+
+}
+.role a:first-child{
+    text-decoration: underline;
+}

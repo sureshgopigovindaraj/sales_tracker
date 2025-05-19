@@ -1,0 +1,277 @@
+@font-face {
+    font-family: 'Cal Sans';
+    src: url('../fonts/CalSans-Regular.eot');
+    src: url('../fonts/CalSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/CalSans-Regular.woff2') format('woff2'),
+        url('../fonts/CalSans-Regular.woff') format('woff'),
+        url('../fonts/CalSans-Regular.ttf') format('truetype'),
+        url('../fonts/') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Cal Sans';
+    width: 1300px;
+    margin: 0px auto;
+    background: #EDE8DC;
+    font-size: medium;
+}
+
+.header{
+    width: 100%;
+    background-color: #3e004a;
+    display: flex;
+    padding: 20px;
+}
+.header >div{
+    flex: auto;
+    padding: 5px 20px;
+}
+.header >div:first-child{
+    color: #EDE8DC;
+}
+.header>div:last-child{
+    text-align: end;
+    padding-top: 10px;
+}
+
+.header >div h1{
+    font-size: xx-large;
+    letter-spacing: 0.07ch;
+    text-transform: capitalize;
+    display:inline-block;
+
+}
+.header >div h1 em{
+    font-size: 30px;
+}
+.header a{
+    text-decoration: none;
+    font-size: x-large;
+    color: rgb(187, 187, 187);
+    text-transform: capitalize;
+    margin: 0px 10px ;
+
+}
+.header a:hover{
+    color: white;
+}
+
+
+.poster{
+    width: 100%;
+}
+
+.poster .options{
+    width: 70%;
+    margin: 0px auto;
+    text-align: center;
+    padding: 20px;
+}
+.options a{
+    text-decoration: none;
+    font-size: x-large;
+    /* padding: 0px 10px; */
+    margin: 0px 20px;
+    text-transform: capitalize;
+    border-bottom: 1px dashed gray;
+    transition: 0.5s;
+}
+#orderhead{
+    border-bottom: 3px solid #3e004a;
+}
+
+.options a:hover{
+    padding: 0px 10px;
+    transition: 0.5s;
+    letter-spacing: 0.5cqb;
+}
+
+.messages{
+    text-align: center;
+    width: 60%;
+    margin: 10px auto;
+    padding: 5px;
+    background-color: rgb(105, 226, 105);
+    color: darkgreen;
+    border-radius: 0px 8px;
+    border-left: 5px solid green;
+    border-right: 5px solid green;
+    display: none;
+}
+.messages h3{
+    letter-spacing: 0.1ch;
+}
+
+
+
+.body-content{
+    width: 100%;
+    display: flex;
+    min-height: 50vh;
+}
+.body-content .operations{
+    width: 25%;
+    background: lightgray;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.body-content .operations a{
+    display: block;
+    text-align: center;
+    font-size: larger;
+    text-transform: capitalize;
+    text-decoration: none;
+}
+
+.body-content .operations a:first-child{
+    border-radius: 10px 0px 0px 0px;
+}
+
+
+
+.body-content .actions{
+    width: 75%;
+    text-align: center;
+    flex: auto;
+    background: rgb(187, 187, 187);
+    padding: 20px;
+    border-radius: 0px 10px 10px 0px;
+}
+.actions h1{
+    color: #3e004a;
+    /* background: #EDE8DC; */
+    letter-spacing: 0.07ch;
+}
+.actions form{
+    margin: 20px;
+    box-shadow: 2px 2px 7px black;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.body-content .actions form{
+    text-transform: capitalize;
+}
+.body-content h1{
+    text-transform: capitalize;
+}
+
+
+.actions form div{
+    display: inline-block;
+    width: 45%;
+    text-align: start;
+    margin: 5px 0px;
+}
+
+
+.actions label{
+    width: 30%;
+    display: inline-block;
+}
+
+
+
+.actions input,.actions textarea, .actions select{
+    padding: 5px;
+    border-radius: 5px;
+}
+textarea{
+    resize: none;
+}
+
+
+
+/* button */
+button,.actions a{
+    width: 75px;
+    text-decoration: none;
+    font-size: 14px;
+    margin: 10px 16px;
+    background: rgb(177, 40, 40);
+    border: 1px solid gray;
+    padding: 5px 14px;
+    border-radius: 7px;
+    transition: 0.5s ease-out;
+    color: #EDE8DC;
+
+}
+
+button{
+    background-color: #5d0070e0;
+}
+
+button:hover,.actions a:hover{
+    box-shadow: 2px 2px 7px rgb(31, 31, 31);
+    transition: 0.5s;
+}
+
+.delete_products button{
+        width: 100px;
+}
+
+.body-content .operations a{
+    padding: 10px 0px;
+    transition: 1s;
+}
+.body-content .operations a:hover{
+    background-color: #9500b381;
+    color: #3e004a;
+    letter-spacing:0.5cqb;
+    transition: 1s;
+}
+
+.add_order fieldset{
+    margin: 15px 0px;
+    padding: 10px ;
+    border: 2px dotted gray;
+}
+.add_order legend{
+    padding-left: 10px;
+    color: #3e004a;
+}
+
+.add_order label{
+    width: 100px;
+}
+
+.add_order fieldset legend{
+    text-align: start;
+}
+
+.add_order button{
+    width: 120px;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+/* none total form */
+#product,#customer{
+    display: none;
+}
+
+/* none orders */
+#update_order{
+    display: none;
+}
+
+/*none customers */
+#update_customer,#create_customer,#delete_customer{
+    display: none;
+}
+/* none products */
+
+#delete_product, #add_stocks,#update_product, #create_product{
+    display: none;
+}
