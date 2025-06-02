@@ -7,7 +7,6 @@
     if(!isset($_POST['action'])){
         setcookie("result","Server Error",time()+15,"/php/Infi/Sales%20Tracker/dev/salesperson.php");
         die;
-
     }
 
     $data = [

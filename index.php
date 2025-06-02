@@ -8,7 +8,6 @@
 <body>
     <?php
     header("location:login.php");
-
 ?>
 </body>
 </html>

@@ -11,7 +11,9 @@ include_once("array_data.php");
 
 $get = $_GET;
 $post = $_POST;
-
+$sampleCustomerNumber = [
+    2155683058,2920308562,6120616861,2442669770,2984536996
+];
 
 if(isset($get['logout']))
     if($get['logout']==1)
@@ -57,7 +59,6 @@ if(isset($get['logout']))
         $resultSet = curl_exec($curl);
         $user_product_data = json_decode($resultSet,true);
     }
-
 ?>
 
 <?php
@@ -113,7 +114,7 @@ if(isset($get['logout']))
     </div>      
     <div class="messages">
         <h3><?= isset($_COOKIE['result'])? $_COOKIE['result'] : '' ?></h3>
-    </div>        
+    </div>
     <!-- CREATE, UPDATE AND DELETE operation for product -->
     <div class="poster">
         <div class="options">
@@ -344,7 +345,6 @@ if(isset($get['logout']))
         <div class="operations">
             <a href="salesperson.php?option1=order&option2=add_order">Create</a>
             <a href="salesperson.php?option1=order&option2=update_order">Update</a>
-
         </div>
         <div class="actions">
             <div class="add_order" id="add_order">
@@ -353,8 +353,16 @@ if(isset($get['logout']))
                     <fieldset>
                         <legend>customer details</legend>
                         <div>
-                            <label for="">customer number</label>      
-                            <input type="number" name="customer_number" placeholder="customer number" required>   
+                            <!-- <label for="">customer number</label>
+                            <input type="number" name="customer_number" placeholder="customer number" required>    -->
+                            <label for="customer_number">customer number</label>
+                            <select name="customer_number" id="customer_number" required>
+                                <?php
+                                foreach($sampleCustomerNumber as $data){
+                                    echo"<option value='$data'>$data</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
                     </fieldset>
                     <fieldset>
@@ -426,6 +434,19 @@ if(isset($get['logout']))
                         <br>
                         <button type="submit" name="action" value="update_status">submit</button>
                     </form>
+                    <!-- <div>
+                        <table cellspacing ='0' cellpadding ='0' border="0" width="100%">
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Phone Number</th>
+                                <th>Ordered Product</th>
+                                <th>Count</th>
+                                <th>total Price</th>
+                                <th>Status</th>
+                            </tr>
+                            
+                        </table>
+                    </div> -->
             </div>
         </div>
     </div>

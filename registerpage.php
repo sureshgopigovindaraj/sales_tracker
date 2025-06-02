@@ -31,10 +31,6 @@
 <div class="registerpage">
         <form action="registerpage.php" method="post" target="_self" enctype="application/x-www-form-urlencoded">
             <h1>Create an account</h1>
-            <div class="role">
-                <a href="registerpage.php?role=0">salesperson</a>
-                <a href="registerpage.php?role=1">admin</a>
-            </div>
             <div>
                 <div>
                     <label for="">First name</label>
@@ -56,7 +52,13 @@
                     <label for="">Password</label>
                     <input type="password" name="password" id="" required>
                 </div>
-                <input type="text" name="role" value="<?php if(isset($_GET['role']))echo ((($_GET['role'])==0) ?'salesperson': "admin"); else echo "salesperson"?>" hidden>
+                <div class="role">
+                    <label for="salesperson"><input type="radio" name="role" id="salesperson" value="salesperson" required >Sales Person</label>
+                    <label for="admin"><input type="radio" name="role" id="admin" value="admin" required>Admin</label>
+                    <!-- <a href="registerpage.php?role=0">salesperson</a>
+                    <a href="registerpage.php?role=1">admin</a> -->
+                </div>
+                <!-- <input type="text" name="role" value="<?php if(isset($_GET['role']))echo ((($_GET['role'])==0) ?'salesperson': "admin"); else echo "salesperson"?>" hidden> -->
                 <button type="submit">create</button>
                 <div class="login">
                     <b>Already have an account?</b><a href="login.php">login</a>
@@ -100,7 +102,7 @@
         "action" =>"createUser",
     ];
 
-    print_r($data);
+    // print_r($data);
     $curl = curl_init();
     $curlData = [
     CURLOPT_URL =>"http://localhost/php/Infi/Sales%20Tracker/dev/server/crud.php",

@@ -141,4 +141,7 @@
     $product_data = json_decode($resultSet,true);
     // print_r($product_data);
 
+    // ordered Details
+    // $orderedQuery = "SELECT "
+
 ?>
