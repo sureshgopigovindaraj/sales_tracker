@@ -1,6 +1,7 @@
 <?php
     session_start();
     ob_start();
+    require_once("curl.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,25 +11,9 @@
     <title>create account</title>
     <link rel="stylesheet" href="assets/styles/login.css">
     <link rel="stylesheet" href="assets/styles/register.css">
-    <style>
-        <?php
-        if(isset($_GET['role']))
-            if($_GET['role']==1)
-            {
-                echo"
-                .role a:first-child{
-                    text-decoration: none;
-                }
-                .role a:last-child{
-                    text-decoration: underline;
-                }
-                ";
-            }
-        ?>
-    </style>
 </head>
 <body>
-<div class="registerpage">
+    <div class="registerpage">
         <form action="registerpage.php" method="post" target="_self" enctype="application/x-www-form-urlencoded">
             <h1>Create an account</h1>
             <div>
@@ -73,22 +58,9 @@
         return;
     }
     // to get value for verification
-    $data = [
-            "data" => $_POST['emailAddress'],
-            "action" =>"emailVerification",
-        ];
-
-    $curl = curl_init();
-    $curlData = [
-        CURLOPT_URL =>"http://localhost/php/Infi/Sales%20Tracker/dev/server/crud.php",
-        CURLOPT_ENCODING =>'',
-        CURLOPT_RETURNTRANSFER =>true,
-        CURLOPT_POST =>true,
-        CURLOPT_POSTFIELDS =>$data,
-    ];
-    curl_setopt_array($curl,$curlData);
-    $result = curl_exec($curl);
-    $userData = json_decode($result,true);
+    $data = $_POST['emailAddress'];
+    $action = "emailVerification";
+    $userData = $curlObj ->retrive($data, $action);
 
     if(!empty($userData)){
         echo "This email is already exists";
@@ -96,24 +68,10 @@
     }
 
     // insert new user and take value
-    
-    $data = [
-        "data" => json_encode($_POST),
-        "action" =>"createUser",
-    ];
-
-    // print_r($data);
-    $curl = curl_init();
-    $curlData = [
-    CURLOPT_URL =>"http://localhost/php/Infi/Sales%20Tracker/dev/server/crud.php",
-    CURLOPT_ENCODING =>'',
-    CURLOPT_RETURNTRANSFER =>true,
-    CURLOPT_POST =>true,
-    CURLOPT_POSTFIELDS =>$data,
-    ];
-    curl_setopt_array($curl,$curlData);
-    $result = curl_exec($curl);
-    $user_data = json_decode($result,true);
+    print_r($_POST);
+    $data = json_encode($_POST);
+    $action = "createUser";
+    $user_data = $curlObj ->retrive($data,$action);
     if(!empty($user_data)){
         $_SESSION['user_id'] = $user_data['user_id'];
         $_SESSION['first_name'] = $user_data['first_name'];
@@ -121,6 +79,9 @@
         $_SESSION['phone_number'] = $user_data['phone_number'];
         $_SESSION['email_address'] = $user_data['email_address'];
         $_SESSION['role'] = $user_data['role'];
+        print_r($_SESSION);
+        print_r($user_data);
+        die;
         if($user_data['role']=='admin'){
             header("location:track.php");
             return;

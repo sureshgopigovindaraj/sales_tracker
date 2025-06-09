@@ -1,23 +1,11 @@
 <?php
-include_once("array_data.php");
+require_once("array_data.php");
 // error_reporting(0);
 
 if(empty($_SESSION)){
     header("location:login.php");
     return;
 }
-
-
-if(isset($_GET['logout']) && $_GET['logout']==1)
-{
-    // print_r($_GET);
-    session_unset();
-    session_destroy();
-    setcookie(session_name(),"",0);
-    header("location:login.php");
-    return;
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +16,6 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
     <title>Sales Tracker</title>
     <link rel="stylesheet" href="assets/styles/bootstrap.min.css">
     <link rel="stylesheet" href="assets/styles/trackstyle.css">
-    <!-- <link rel="stylesheet" href="assets/styles/font-awesome.min.css"> -->
     <link rel="stylesheet" href="assets/styles/all.min.css">
 </head>
 <body>
@@ -41,7 +28,7 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
 
                     ?>
                     <h1>Sales tracker</h1>
-                    <a href="track.php?logout=1"><i class="fa-solid fa-right-from-bracket"></i> logout</a>
+                    <a href="logout.php"><i class="fa-solid fa-right-from-bracket"></i> logout</a>
                 </div>
             </div>
         </div>
@@ -111,22 +98,22 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
                             </div>
                             <div class="summary">
                                 <div>
-                                    <h1>Total sales</h1><b><?= empty($summary_data['total_sales']) ? "0" : $summary_data['total_sales'] ?></b>
+                                    <h1>Total sales</h1><b><?= empty($fetchedArray['total_sales']) ? "0" : $fetchedArray['total_sales'] ?></b>
                                 </div>
                                 <div>
-                                    <h1>orders</h1><b><?= empty($summary_data['total_orders']) ? "0" : $summary_data['total_orders'] ?></b>
+                                    <h1>orders</h1><b><?= empty($fetchedArray['total_orders']) ? "0" : $fetchedArray['total_orders'] ?></b>
                                 </div>
                                 <div>
-                                    <h1>customers</h1><b><?= empty($summary_data['customers']) ? "0" : $summary_data['customers'] ?></b>
+                                    <h1>customers</h1><b><?= empty($fetchedArray['customers']) ? "0" : $fetchedArray['customers'] ?></b>
                                 </div>
                                 <div>
-                                    <h1>Revenue</h1><b><?= empty($summary_data['revenue']) ? "0" : $summary_data['revenue'] ?></b>
+                                    <h1>Revenue</h1><b><?= empty($fetchedArray['revenue']) ? "0" : $fetchedArray['revenue'] ?></b>
                                 </div>
                                 <div>
-                                    <h1>Profit</h1><b><?= empty($summary_data['profit']) ? "0" : $summary_data['profit'] ?></b>
+                                    <h1>Profit</h1><b><?= empty($fetchedArray['profit']) ? "0" : $fetchedArray['profit'] ?></b>
                                 </div>
                                 <div>
-                                    <h1>loss</h1><b><?= empty($summary_data['loss']) ? "0" : $summary_data['loss'] ?></b>
+                                    <h1>loss</h1><b><?= empty($fetchedArray['loss']) ? "0" : $fetchedArray['loss'] ?></b>
                                 </div>
                             </div>
                         </div>
@@ -150,8 +137,8 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
                                         <th>loss</th>
                                     </tr>
                                     <?php
-                                    if(!empty($list_data)){
-                                        foreach($list_data as $list){
+                                    if(!empty($fetchedArray['listAllArray'])){
+                                        foreach($fetchedArray['listAllArray'] as $list){
                                             echo "<tr>";
                                             echo"<td>$list[product_name]</td>";
                                             echo"<td>$list[product_category]</td>";
@@ -185,8 +172,8 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
                                         <th>Profit</th>
                                     </tr>
                                     <?php
-                                    if(!empty($completed_status_array)){
-                                        foreach($completed_status_array as $list){
+                                    if(!empty($fetchedArray['completedArray'])){
+                                        foreach($fetchedArray['completedArray'] as $list){
                                             echo "<tr>";
                                             echo"<td>$list[product_name]</td>";
                                             echo"<td>$list[product_category]</td>";
@@ -219,8 +206,8 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
                                         <th>pending amount</th>
                                     </tr>
                                     <?php
-                                    if(!empty($pending_status_array)){
-                                        foreach($pending_status_array as $list){
+                                    if(!empty($fetchedArray['pendingArray'])){
+                                        foreach($fetchedArray['pendingArray'] as $list){
                                             echo "<tr>";
                                             echo"<td>$list[product_name]</td>";
                                             echo"<td>$list[product_category]</td>";
@@ -253,8 +240,8 @@ if(isset($_GET['logout']) && $_GET['logout']==1)
                                         <th>Loss</th>
                                     </tr>
                                     <?php
-                                    if(!empty($cancelled_status_array)){
-                                        foreach($cancelled_status_array as $list){
+                                    if(!empty($fetchedArray['cancelledArray'])){
+                                        foreach($fetchedArray['cancelledArray'] as $list){
                                             echo "<tr>";
                                             echo"<td>$list[product_name]</td>";
                                             echo"<td>$list[product_category]</td>";

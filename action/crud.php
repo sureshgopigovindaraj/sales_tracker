@@ -2,6 +2,7 @@
 
     // this is the file to insert update and delete data from databases and this relocate to previous page using header
     include_once("../config/connect_mysql.php");
+    require "../curl.php";
     session_start();
 
     if(!isset($_POST['action'])){
@@ -9,21 +10,9 @@
         die;
     }
 
-    $data = [
-        "data" => json_encode($_POST),    
-        "action" =>$_POST['action'],
-    ];
-
-    $curl = curl_init();
-    $curlData = [
-        CURLOPT_URL =>"http://localhost/php/Infi/Sales%20Tracker/dev/server/crud.php",
-        CURLOPT_ENCODING =>'',
-        CURLOPT_RETURNTRANSFER =>true,
-        CURLOPT_POST =>true,
-        CURLOPT_POSTFIELDS =>$data,
-    ];
-    curl_setopt_array($curl,$curlData);
-    $result = curl_exec($curl);
+    $data =json_encode($_POST);
+    $action = $_POST['action'];
+    $result = $curlObj -> store($data, $action);
     setcookie("result",$result,time()+15,"/php/Infi/Sales%20Tracker/dev/salesperson.php");
 
     

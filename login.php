@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once("curl.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +27,7 @@
             </div>
             <button type="submit" name="action" value="login">login</button>
             <div class="signup">
-                <b>create an account</b><a href="registerpage.php?role=0">Sign Up</a>
+                <b>create an account</b><a href="registerpage.php">Sign Up</a>
             </div>
         </form>
         
@@ -37,24 +38,10 @@
     // validate user
     if(!empty($_POST))
     {
-
-        // get user data from database    
-        $data = [
-            "data" => $_POST['emailAddress'],
-            "action" =>"emailVerification",
-        ];
-
-        $curl = curl_init();
-        $curlData = [
-            CURLOPT_URL =>"http://localhost/php/Infi/Sales%20Tracker/dev/server/crud.php",
-            CURLOPT_ENCODING =>'',
-            CURLOPT_RETURNTRANSFER =>true,
-            CURLOPT_POST =>true,
-            CURLOPT_POSTFIELDS =>$data,
-        ];
-        curl_setopt_array($curl,$curlData);
-        $result = curl_exec($curl);
-        $user_data = json_decode($result,true);
+        // get user data from database
+        $data = $_POST['emailAddress'];
+        $action = "emailVerification";
+        $user_data = $curlObj -> retrive($data,$action);
 
         if(!empty($user_data)){
             if($user_data['password'] != $_POST['password']){

@@ -2,10 +2,10 @@
 include_once("array_data.php");
 
 
-// if(empty($_SESSION)){
-//     header("location:login.php");
-//     return;
-// }
+if(empty($_SESSION)){
+    header("location:login.php");
+    return;
+}
 //want ot implement the code for error message
 
 
@@ -15,16 +15,16 @@ $sampleCustomerNumber = [
     2155683058,2920308562,6120616861,2442669770,2984536996
 ];
 
-if(isset($get['logout']))
-    if($get['logout']==1)
-    {
-        // print_r($_GET);
-        session_unset();
-        session_destroy();
-        setcookie("emaiAddress","",0);
-        setcookie("password","",0);
-        header("location:login.php");
-    }
+// if(isset($get['logout']))
+//     if($get['logout']==1)
+//     {
+//         // print_r($_GET);
+//         session_unset();
+//         session_destroy();
+//         setcookie("emaiAddress","",0);
+//         setcookie("password","",0);
+//         header("location:login.php");
+//     }
 
 ?>
 
@@ -109,7 +109,7 @@ if(isset($get['logout']))
         </div>
         <div>
             <a href="track.php"><em class="fa-solid fa-chart-line"></em> track sales</a>
-            <a href="salesperson.php?logout=1"><em class="fa-solid fa-right-from-bracket"></em>  logout</a>
+            <a href="logout.php"><em class="fa-solid fa-right-from-bracket"></em>  logout</a>
         </div>
     </div>      
     <div class="messages">
