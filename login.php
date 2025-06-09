@@ -18,12 +18,12 @@
             <div>
                 <label for="email_address">Email address</label>
                 <input type="email" name="emailAddress" id="email_address" value="<?= isset($_COOKIE['emailAddress'])? $_COOKIE['emailAddress'] : ''?>" required>
-                <h4><?= (isset($_GET['mailError']) ? $_GET['mailError']:"" )?></h4>
+                <h4><?= (isset($_COOKIE["mailError"]) ? $_COOKIE["mailError"]:"" )?></h4>
             </div>
             <div>
                 <label for="password">password</label>
-                <input type="password" id="password" name="password" value="<?= isset($_COOKIE['password'])? $_COOKIE['password'] : ''?>" required>
-                <h4><?= (isset($_GET['passwordError']) ? $_GET['passwordError']:"" )?></h4>
+                <input type="password" id="password" name="password" value="" required>
+                <h4><?= (isset($_COOKIE["passError"]) ? $_COOKIE["passError"]:"" )?></h4>
             </div>
             <button type="submit" name="action" value="login">login</button>
             <div class="signup">
@@ -47,7 +47,9 @@
             if($user_data['password'] != $_POST['password']){
                 if(isset($_COOKIE['password']))  setcookie("password","",0) ;
                 setcookie("emailAddress",$_POST['emailAddress'],(time()+120));
-                header("location:login.php?passwordError=*incorrect password");
+                setcookie("mailError","",0);
+                setcookie("passError","*Incorrect password",(time()+10));
+                header("location:login.php");
                 return;
             }
             $_SESSION['user_id'] = $user_data['user_id'];
@@ -63,8 +65,9 @@
             header("location:salesperson.php");
         }else{
             if(isset($_COOKIE['emailAddress']))  setcookie("emailAddress","",0) ;
-            setcookie("password",$_POST['password'],(time()+120));
-            header("location:login.php?mailError=*Incorrect mail");
+            setcookie("mailError","*Incorrect mail",(time()+10));
+            setcookie("passError","",0);
+            header("location:login.php");
             return;
         }
     }   
